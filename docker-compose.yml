@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: transescolar
+      POSTGRES_PASSWORD: transescolar
+      POSTGRES_DB: transescolar
+    ports:
+      # Host 5432 = URL comum postgresql://...@localhost:5432/...
+      # Se a porta 5432 já estiver em uso no Mac, troque para "5433:5432" e ajuste o DATABASE_URL.
+      - "5432:5432"
+    volumes:
+      - transescolar_pg:/var/lib/postgresql/data
+
+volumes:
+  transescolar_pg:
