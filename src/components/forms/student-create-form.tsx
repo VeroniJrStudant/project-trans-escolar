@@ -44,6 +44,48 @@ export function StudentCreateForm() {
             className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
           />
         </div>
+        <div className="sm:col-span-2">
+          <p className="text-xs font-semibold uppercase tracking-wide text-subtle">
+            Pagamento (mensalidade)
+          </p>
+        </div>
+        <Field
+          label="Mensalidade (R$) (opcional)"
+          name="tuitionMonthlyAmountBrl"
+          type="number"
+          className="sm:col-span-1"
+        />
+        <Field
+          label="Vencimento (dia do mês) (opcional)"
+          name="tuitionDueDay"
+          type="number"
+          className="sm:col-span-1"
+        />
+        <div className="sm:col-span-1">
+          <label className="block text-xs font-medium text-muted" htmlFor="tuitionPaymentMethod">
+            Forma de pagamento (opcional)
+          </label>
+          <select
+            id="tuitionPaymentMethod"
+            name="tuitionPaymentMethod"
+            defaultValue=""
+            className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+          >
+            <option value="">—</option>
+            <option value="PIX">PIX</option>
+            <option value="BOLETO">Boleto</option>
+            <option value="DINHEIRO">Dinheiro</option>
+            <option value="CARTAO">Cartão</option>
+            <option value="TRANSFERENCIA">Transferência</option>
+            <option value="OUTRO">Outro</option>
+          </select>
+        </div>
+        <Field
+          label="Desconto (R$) (opcional)"
+          name="tuitionDiscountBrl"
+          type="number"
+          className="sm:col-span-1"
+        />
       </div>
 
       {msg && !msg.ok ? (
@@ -87,6 +129,13 @@ function Field({
         name={name}
         type={type}
         required={required}
+        step={
+          type === "number"
+            ? name === "tuitionDueDay"
+              ? "1"
+              : "0.01"
+            : undefined
+        }
         className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
       />
     </div>

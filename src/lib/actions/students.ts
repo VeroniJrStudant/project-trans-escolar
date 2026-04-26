@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { writeAuditLog } from "@/lib/audit";
 import { studentCreateSchema } from "@/lib/validations";
@@ -28,6 +29,10 @@ export async function createStudent(
     guardianPhone: formData.get("guardianPhone") || undefined,
     notes: formData.get("notes") || undefined,
     active: formData.get("active") !== "off",
+    tuitionMonthlyAmountBrl: formData.get("tuitionMonthlyAmountBrl") || undefined,
+    tuitionDueDay: formData.get("tuitionDueDay") || undefined,
+    tuitionPaymentMethod: formData.get("tuitionPaymentMethod") || undefined,
+    tuitionDiscountBrl: formData.get("tuitionDiscountBrl") || undefined,
   };
   const parsed = studentCreateSchema.safeParse(raw);
   if (!parsed.success) {
@@ -43,6 +48,16 @@ export async function createStudent(
       guardianPhone: d.guardianPhone,
       notes: d.notes,
       active: d.active ?? true,
+      tuitionMonthlyAmountBrl:
+        d.tuitionMonthlyAmountBrl != null
+          ? new Prisma.Decimal(d.tuitionMonthlyAmountBrl)
+          : undefined,
+      tuitionDueDay: d.tuitionDueDay,
+      tuitionPaymentMethod: d.tuitionPaymentMethod,
+      tuitionDiscountBrl:
+        d.tuitionDiscountBrl != null
+          ? new Prisma.Decimal(d.tuitionDiscountBrl)
+          : undefined,
     },
   });
   await writeAuditLog({

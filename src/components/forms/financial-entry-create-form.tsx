@@ -11,9 +11,13 @@ type StudentOpt = { id: string; name: string; active: boolean };
 export function FinancialEntryCreateForm({
   vehicles,
   students,
+  initialStudentId,
+  initialCategory,
 }: {
   vehicles: VehicleOpt[];
   students: StudentOpt[];
+  initialStudentId?: string;
+  initialCategory?: string;
 }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
@@ -53,7 +57,13 @@ export function FinancialEntryCreateForm({
           </select>
         </div>
         <Field label="Data" name="date" type="date" required />
-        <Field label="Categoria" name="category" required placeholder="Mensalidade, Combustível..." />
+        <Field
+          label="Categoria"
+          name="category"
+          required
+          placeholder="Mensalidade, Combustível..."
+          defaultValue={initialCategory}
+        />
         <Field
           label="Valor (R$)"
           name="amountBrl"
@@ -66,7 +76,7 @@ export function FinancialEntryCreateForm({
           <select
             name="studentId"
             className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
-            defaultValue=""
+            defaultValue={initialStudentId ?? ""}
           >
             <option value="">—</option>
             {activeStudents.map((s) => (
@@ -128,12 +138,14 @@ function Field({
   type = "text",
   required,
   placeholder,
+  defaultValue,
 }: {
   label: string;
   name: string;
   type?: string;
   required?: boolean;
   placeholder?: string;
+  defaultValue?: string;
 }) {
   return (
     <div>
@@ -146,6 +158,7 @@ function Field({
         type={type}
         required={required}
         placeholder={placeholder}
+        defaultValue={defaultValue}
         className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
       />
     </div>

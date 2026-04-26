@@ -105,6 +105,30 @@ export const studentCreateSchema = z.object({
   guardianPhone: z.string().max(60).optional().transform((s) => s?.trim() || undefined),
   notes: z.string().max(2000).optional().transform((s) => s?.trim() || undefined),
   active: z.coerce.boolean().optional(),
+  tuitionMonthlyAmountBrl: z.coerce
+    .number()
+    .min(0)
+    .max(9_999_999.99)
+    .optional()
+    .transform((n) => (Number.isFinite(n) ? n : undefined)),
+  tuitionDueDay: z.coerce
+    .number()
+    .int()
+    .min(1)
+    .max(31)
+    .optional()
+    .transform((n) => (Number.isFinite(n) ? n : undefined)),
+  tuitionPaymentMethod: z
+    .string()
+    .max(40)
+    .optional()
+    .transform((s) => s?.trim() || undefined),
+  tuitionDiscountBrl: z.coerce
+    .number()
+    .min(0)
+    .max(9_999_999.99)
+    .optional()
+    .transform((n) => (Number.isFinite(n) ? n : undefined)),
 });
 
 export const financialEntryCreateSchema = z.object({
@@ -115,6 +139,38 @@ export const financialEntryCreateSchema = z.object({
   notes: z.string().max(2000).optional().transform((s) => s?.trim() || undefined),
   vehicleId: z.string().optional().transform((s) => (s ? s : undefined)),
   studentId: z.string().optional().transform((s) => (s ? s : undefined)),
+});
+
+export const eventTripCreateSchema = z
+  .object({
+    title: z.string().min(2).max(120).transform((s) => s.trim()),
+    origin: z.string().min(2).max(200).transform((s) => s.trim()),
+    destination: z.string().min(2).max(200).transform((s) => s.trim()),
+    direction: z.enum(["ida", "ida_volta"]),
+    departAt: z.string().min(8),
+    returnAt: z.string().optional(),
+    priceBrl: z.coerce.number().min(0).max(9_999_999.99).optional(),
+    notes: z.string().max(2000).optional().transform((s) => s?.trim() || undefined),
+  })
+  .superRefine((v, ctx) => {
+    if (v.direction === "ida_volta") {
+      if (!v.returnAt || String(v.returnAt).trim() === "") {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Informe a data/hora de volta para viagens de ida e volta.",
+          path: ["returnAt"],
+        });
+      }
+    }
+  });
+
+export const tripPassengerCreateSchema = z.object({
+  tripId: z.string().min(1),
+  studentId: z.string().optional().transform((s) => (s ? s : undefined)),
+  name: z.string().min(2).max(160).transform((s) => s.trim()),
+  phone: z.string().max(80).optional().transform((s) => s?.trim() || undefined),
+  email: z.string().email().optional().transform((s) => s?.trim().toLowerCase() || undefined),
+  notes: z.string().max(2000).optional().transform((s) => s?.trim() || undefined),
 });
 
 export const adminUserCreateSchema = z.object({

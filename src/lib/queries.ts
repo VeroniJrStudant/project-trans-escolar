@@ -37,6 +37,37 @@ export async function listFinancialEntries(limit = 50) {
   });
 }
 
+export async function listAcceptedPaymentMethods() {
+  return prisma.acceptedPaymentMethod.findMany({
+    orderBy: [{ sortOrder: "asc" }, { code: "asc" }],
+    select: { code: true, active: true, sortOrder: true, notes: true },
+  });
+}
+
+export async function listEventTrips(limit = 50) {
+  return prisma.eventTrip.findMany({
+    orderBy: { departAt: "desc" },
+    take: limit,
+    include: {
+      passengers: { select: { status: true, name: true } },
+      createdBy: { select: { name: true, email: true } },
+    },
+  });
+}
+
+export async function getEventTripById(id: string) {
+  return prisma.eventTrip.findUnique({
+    where: { id },
+    include: {
+      passengers: {
+        orderBy: [{ status: "asc" }, { name: "asc" }],
+        include: { student: { select: { name: true, guardianPhone: true, guardianName: true } } },
+      },
+      createdBy: { select: { name: true, email: true } },
+    },
+  });
+}
+
 export async function listAuditLogs(limit = 80) {
   return prisma.auditLog.findMany({
     orderBy: { createdAt: "desc" },

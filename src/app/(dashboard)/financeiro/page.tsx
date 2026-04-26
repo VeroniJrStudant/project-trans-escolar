@@ -1,14 +1,25 @@
+import Link from "next/link";
 import { FinancialEntryCreateForm } from "@/components/forms/financial-entry-create-form";
-import { formatBrl, formatDate } from "@/lib/format";
-import { listFinancialEntries, listStudents, listVehicles } from "@/lib/queries";
+import { FinanceSubnav } from "@/components/finance/finance-subnav";
+import { AcceptedPaymentMethodsCard } from "@/components/finance/accepted-payment-methods-card";
+import { RecentFinancialRecords } from "@/components/finance/recent-financial-records";
+import { StudentFinanceContractsPanel } from "@/components/finance/student-finance-contracts-panel";
+import { PAYMENT_METHOD_OPTIONS, type PaymentMethodCode } from "@/lib/finance/payment-methods";
+import { formatBrl } from "@/lib/format";
+import { listAcceptedPaymentMethods, listFinancialEntries, listStudents, listVehicles } from "@/lib/queries";
 
 export const dynamic = "force-dynamic";
 
-export default async function FinanceiroPage() {
-  const [entries, vehicles, students] = await Promise.all([
-    listFinancialEntries(80),
+export default async function FinanceiroPage({
+  searchParams,
+}: {
+  searchParams?: { studentId?: string; category?: string };
+}) {
+  const [entries, vehicles, students, accepted] = await Promise.all([
+    listFinancialEntries(50),
     listVehicles(),
     listStudents(),
+    listAcceptedPaymentMethods(),
   ]);
 
   const receita = entries
@@ -18,6 +29,14 @@ export default async function FinanceiroPage() {
     .filter((e) => e.type === "DESPESA")
     .reduce((acc, e) => acc + Number(e.amountBrl), 0);
   const saldo = receita - despesa;
+
+  const allowed = new Set<PaymentMethodCode>(PAYMENT_METHOD_OPTIONS.map((o) => o.code));
+  const acceptedRows = accepted
+    .filter((r) => allowed.has(r.code as PaymentMethodCode))
+    .map((r) => ({
+      ...r,
+      code: r.code as PaymentMethodCode,
+    }));
 
   return (
     <div className="space-y-8">
@@ -29,64 +48,97 @@ export default async function FinanceiroPage() {
         </p>
       </div>
 
+      <FinanceSubnav />
+
+      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <Link
+          href="/financeiro/recebimento"
+          className="group rounded-2xl border border-line-soft bg-elevated-2 p-4 shadow-sm transition hover:border-accent-border hover:shadow-md"
+        >
+          <h2 className="text-sm font-semibold text-ink">Recebimento (mensalidades)</h2>
+          <p className="mt-2 text-sm text-muted">
+            Registrar pagamento recebido por aluno (PIX, dinheiro, transferência etc.).
+          </p>
+          <span className="mt-3 inline-block text-xs font-medium text-accent-muted group-hover:underline">
+            Abrir →
+          </span>
+        </Link>
+        <Link
+          href="/financeiro/pix-impresso"
+          className="group rounded-2xl border border-line-soft bg-elevated-2 p-4 shadow-sm transition hover:border-accent-border hover:shadow-md"
+        >
+          <h2 className="text-sm font-semibold text-ink">PIX para impressão</h2>
+          <p className="mt-2 text-sm text-muted">
+            Gerar “copia e cola” e QR para imprimir e receber mais rápido.
+          </p>
+          <span className="mt-3 inline-block text-xs font-medium text-accent-muted group-hover:underline">
+            Abrir →
+          </span>
+        </Link>
+        <Link
+          href="/financeiro/lancamentos-lote"
+          className="group rounded-2xl border border-line-soft bg-elevated-2 p-4 shadow-sm transition hover:border-accent-border hover:shadow-md"
+        >
+          <h2 className="text-sm font-semibold text-ink">Lançamentos em lote</h2>
+          <p className="mt-2 text-sm text-muted">
+            Importar vários lançamentos de uma vez (CSV/linhas).
+          </p>
+          <span className="mt-3 inline-block text-xs font-medium text-accent-muted group-hover:underline">
+            Abrir →
+          </span>
+        </Link>
+        <Link
+          href="/financeiro/configuracao"
+          className="group rounded-2xl border border-line-soft bg-elevated-2 p-4 shadow-sm transition hover:border-accent-border hover:shadow-md"
+        >
+          <h2 className="text-sm font-semibold text-ink">Configuração</h2>
+          <p className="mt-2 text-sm text-muted">
+            Preferências e políticas internas do financeiro (em breve).
+          </p>
+          <span className="mt-3 inline-block text-xs font-medium text-accent-muted group-hover:underline">
+            Abrir →
+          </span>
+        </Link>
+      </section>
+
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         <Kpi title="Receitas" value={formatBrl(receita)} />
         <Kpi title="Despesas" value={formatBrl(despesa)} />
         <Kpi title="Saldo" value={formatBrl(saldo)} />
       </div>
 
-      <FinancialEntryCreateForm vehicles={vehicles} students={students} />
+      <AcceptedPaymentMethodsCard initial={acceptedRows} />
 
-      <section className="rounded-xl border border-line bg-elevated p-5 shadow-sm">
-        <h2 className="text-sm font-semibold text-ink">Lançamentos</h2>
-        <div className="mt-4 overflow-auto">
-          <table className="min-w-full text-sm">
-            <thead className="text-left text-xs text-subtle">
-              <tr>
-                <th className="py-2 pr-4">Data</th>
-                <th className="py-2 pr-4">Tipo</th>
-                <th className="py-2 pr-4">Categoria</th>
-                <th className="py-2 pr-4">Aluno</th>
-                <th className="py-2 pr-4">Veículo</th>
-                <th className="py-2 pr-4">Valor</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-line-soft">
-              {entries.map((e) => (
-                <tr key={e.id}>
-                  <td className="py-2 pr-4 text-muted">
-                    {formatDate(e.date.toISOString())}
-                  </td>
-                  <td className="py-2 pr-4">
-                    {e.type === "RECEITA" ? (
-                      <span className="rounded bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-800">
-                        receita
-                      </span>
-                    ) : (
-                      <span className="rounded bg-rose-50 px-2 py-0.5 text-xs font-medium text-rose-800">
-                        despesa
-                      </span>
-                    )}
-                  </td>
-                  <td className="py-2 pr-4 font-medium text-ink">{e.category}</td>
-                  <td className="py-2 pr-4 text-muted">{e.student?.name ?? "—"}</td>
-                  <td className="py-2 pr-4 text-muted">{e.vehicle?.plate ?? "—"}</td>
-                  <td className="py-2 pr-4 font-medium text-ink">
-                    {formatBrl(Number(e.amountBrl))}
-                  </td>
-                </tr>
-              ))}
-              {!entries.length ? (
-                <tr>
-                  <td className="py-3 text-subtle" colSpan={6}>
-                    Nenhum lançamento.
-                  </td>
-                </tr>
-              ) : null}
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <StudentFinanceContractsPanel
+        students={students.map((s) => ({
+          id: s.id,
+          name: s.name,
+          active: s.active,
+          tuitionMonthlyAmountBrl: s.tuitionMonthlyAmountBrl?.toString() ?? null,
+          tuitionDueDay: s.tuitionDueDay ?? null,
+          tuitionPaymentMethod: s.tuitionPaymentMethod ?? null,
+          tuitionDiscountBrl: s.tuitionDiscountBrl?.toString() ?? null,
+        }))}
+      />
+
+      <RecentFinancialRecords
+        rows={entries.map((e) => ({
+          id: e.id,
+          type: e.type,
+          amountBrl: e.amountBrl.toString(),
+          category: e.category,
+          dateIso: e.date.toISOString(),
+          studentName: e.student?.name ?? null,
+          vehiclePlate: e.vehicle?.plate ?? null,
+        }))}
+      />
+
+      <FinancialEntryCreateForm
+        vehicles={vehicles}
+        students={students}
+        initialStudentId={searchParams?.studentId}
+        initialCategory={searchParams?.category}
+      />
     </div>
   );
 }
