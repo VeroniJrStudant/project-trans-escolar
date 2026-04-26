@@ -22,10 +22,8 @@ export default async function FinanceiroPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
-          Financeiro
-        </h1>
-        <p className="mt-1 max-w-2xl text-sm text-slate-600">
+        <h1 className="text-2xl font-semibold tracking-tight text-ink">Financeiro</h1>
+        <p className="mt-1 max-w-2xl text-sm text-muted">
           Registro simples de receitas e despesas (mensalidades, combustível, peças,
           serviços etc.).
         </p>
@@ -39,11 +37,11 @@ export default async function FinanceiroPage() {
 
       <FinancialEntryCreateForm vehicles={vehicles} students={students} />
 
-      <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-sm font-semibold text-slate-800">Lançamentos</h2>
+      <section className="rounded-xl border border-line bg-elevated p-5 shadow-sm">
+        <h2 className="text-sm font-semibold text-ink">Lançamentos</h2>
         <div className="mt-4 overflow-auto">
           <table className="min-w-full text-sm">
-            <thead className="text-left text-xs text-slate-500">
+            <thead className="text-left text-xs text-subtle">
               <tr>
                 <th className="py-2 pr-4">Data</th>
                 <th className="py-2 pr-4">Tipo</th>
@@ -53,10 +51,10 @@ export default async function FinanceiroPage() {
                 <th className="py-2 pr-4">Valor</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-line-soft">
               {entries.map((e) => (
                 <tr key={e.id}>
-                  <td className="py-2 pr-4 text-slate-600">
+                  <td className="py-2 pr-4 text-muted">
                     {formatDate(e.date.toISOString())}
                   </td>
                   <td className="py-2 pr-4">
@@ -70,17 +68,17 @@ export default async function FinanceiroPage() {
                       </span>
                     )}
                   </td>
-                  <td className="py-2 pr-4 font-medium text-slate-800">{e.category}</td>
-                  <td className="py-2 pr-4 text-slate-600">{e.student?.name ?? "—"}</td>
-                  <td className="py-2 pr-4 text-slate-600">{e.vehicle?.plate ?? "—"}</td>
-                  <td className="py-2 pr-4 font-medium text-slate-800">
+                  <td className="py-2 pr-4 font-medium text-ink">{e.category}</td>
+                  <td className="py-2 pr-4 text-muted">{e.student?.name ?? "—"}</td>
+                  <td className="py-2 pr-4 text-muted">{e.vehicle?.plate ?? "—"}</td>
+                  <td className="py-2 pr-4 font-medium text-ink">
                     {formatBrl(Number(e.amountBrl))}
                   </td>
                 </tr>
               ))}
               {!entries.length ? (
                 <tr>
-                  <td className="py-3 text-slate-500" colSpan={6}>
+                  <td className="py-3 text-subtle" colSpan={6}>
                     Nenhum lançamento.
                   </td>
                 </tr>
@@ -95,9 +93,9 @@ export default async function FinanceiroPage() {
 
 function Kpi({ title, value }: { title: string; value: string }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-      <p className="text-xs font-medium text-slate-500">{title}</p>
-      <p className="mt-1 text-lg font-semibold text-slate-900">{value}</p>
+    <div className="rounded-xl border border-line bg-elevated p-5 shadow-sm">
+      <p className="text-xs font-medium text-subtle">{title}</p>
+      <p className="mt-1 text-lg font-semibold text-ink">{value}</p>
     </div>
   );
 }

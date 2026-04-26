@@ -10,7 +10,7 @@ const RouteMap = dynamic(
 
 function MapSkeleton() {
   return (
-    <div className="flex h-[420px] items-center justify-center rounded-xl border border-slate-200 bg-slate-100 text-sm text-slate-500">
+    <div className="flex h-[420px] items-center justify-center rounded-xl border border-line bg-elevated text-sm text-subtle">
       Carregando mapa…
     </div>
   );

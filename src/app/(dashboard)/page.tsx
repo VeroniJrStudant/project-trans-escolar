@@ -37,10 +37,10 @@ export default async function HomePage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
+        <h1 className="text-2xl font-semibold tracking-tight text-ink">
           Visão geral
         </h1>
-        <p className="mt-1 max-w-2xl text-sm text-slate-600">
+        <p className="mt-1 max-w-2xl text-sm text-muted">
           Painel para frota pequena de transporte escolar: rotas percorridas,
           abastecimento, peças e revisões por veículo (dados no PostgreSQL).
         </p>
@@ -99,13 +99,11 @@ export default async function HomePage() {
       ) : null}
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+        <section className="rounded-xl border border-line bg-elevated p-5 shadow-sm">
           <div className="flex items-center justify-between gap-3">
-            <h2 className="text-sm font-semibold text-slate-800">
-              Acesso rápido
-            </h2>
+            <h2 className="text-sm font-semibold text-ink">Acesso rápido</h2>
           </div>
-          <ul className="mt-4 divide-y divide-slate-100">
+          <ul className="mt-4 divide-y divide-line-soft">
             {[
               {
                 href: "/lancamentos",
@@ -134,33 +132,31 @@ export default async function HomePage() {
                   className="group flex items-center justify-between gap-3 py-3 text-sm"
                 >
                   <div>
-                    <p className="font-medium text-slate-800 group-hover:text-emerald-700">
+                    <p className="font-medium text-ink group-hover:text-emerald-700">
                       {item.title}
                     </p>
-                    <p className="text-xs text-slate-500">{item.desc}</p>
+                    <p className="text-xs text-subtle">{item.desc}</p>
                   </div>
-                  <ArrowRight className="h-4 w-4 shrink-0 text-slate-300 transition group-hover:translate-x-0.5 group-hover:text-emerald-600" />
+                  <ArrowRight className="h-4 w-4 shrink-0 text-subtle/60 transition group-hover:translate-x-0.5 group-hover:text-emerald-600" />
                 </Link>
               </li>
             ))}
           </ul>
         </section>
 
-        <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-sm font-semibold text-slate-800">
-            Últimas viagens
-          </h2>
+        <section className="rounded-xl border border-line bg-elevated p-5 shadow-sm">
+          <h2 className="text-sm font-semibold text-ink">Últimas viagens</h2>
           <ul className="mt-4 space-y-3 text-sm">
             {trips.slice(0, 6).map((t) => {
               const v = vehicles.find((x) => x.id === t.vehicleId);
               return (
                 <li
                   key={t.id}
-                  className="flex flex-wrap items-baseline justify-between gap-2 rounded-lg bg-slate-50 px-3 py-2"
+                  className="flex flex-wrap items-baseline justify-between gap-2 rounded-lg bg-elevated-2 px-3 py-2"
                 >
                   <div>
-                    <p className="font-medium text-slate-800">{t.routeName}</p>
-                    <p className="text-xs text-slate-500">
+                    <p className="font-medium text-ink">{t.routeName}</p>
+                    <p className="text-xs text-subtle">
                       {v?.plate} · {t.distanceKm} km · {t.stops} paradas
                     </p>
                   </div>

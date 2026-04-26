@@ -12,7 +12,7 @@ export function AdminUserCreateForm() {
 
   return (
     <form
-      className="space-y-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
+      className="space-y-4 rounded-xl border border-line bg-elevated p-5 shadow-sm"
       onSubmit={(e) => {
         e.preventDefault();
         setMsg(null);
@@ -27,17 +27,17 @@ export function AdminUserCreateForm() {
         });
       }}
     >
-      <h2 className="text-sm font-semibold text-slate-800">Criar usuário</h2>
+      <h2 className="text-sm font-semibold text-ink">Criar usuário</h2>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Nome" name="name" required />
         <Field label="E-mail" name="email" type="email" required />
         <Field label="Senha" name="password" type="password" required />
         <div>
-          <label className="block text-xs font-medium text-slate-600">Papel</label>
+          <label className="block text-xs font-medium text-muted">Papel</label>
           <select
             name="role"
             defaultValue="operador"
-            className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+            className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
           >
             <option value="admin">Admin</option>
             <option value="operador">Operador</option>
@@ -77,7 +77,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-xs font-medium text-slate-600" htmlFor={name}>
+      <label className="block text-xs font-medium text-muted" htmlFor={name}>
         {label}
       </label>
       <input
@@ -85,7 +85,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900"
+        className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
       />
     </div>
   );

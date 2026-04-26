@@ -23,7 +23,7 @@ export function FinancialEntryCreateForm({
 
   return (
     <form
-      className="space-y-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
+      className="space-y-4 rounded-xl border border-line bg-elevated p-5 shadow-sm"
       onSubmit={(e) => {
         e.preventDefault();
         setMsg(null);
@@ -38,15 +38,15 @@ export function FinancialEntryCreateForm({
         });
       }}
     >
-      <h2 className="text-sm font-semibold text-slate-800">Novo lançamento</h2>
+      <h2 className="text-sm font-semibold text-ink">Novo lançamento</h2>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <div>
-          <label className="block text-xs font-medium text-slate-600">Tipo</label>
+          <label className="block text-xs font-medium text-muted">Tipo</label>
           <select
             name="type"
             defaultValue="despesa"
-            className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+            className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
           >
             <option value="receita">Receita</option>
             <option value="despesa">Despesa</option>
@@ -62,10 +62,10 @@ export function FinancialEntryCreateForm({
           placeholder="0.00"
         />
         <div>
-          <label className="block text-xs font-medium text-slate-600">Aluno (opcional)</label>
+          <label className="block text-xs font-medium text-muted">Aluno (opcional)</label>
           <select
             name="studentId"
-            className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+            className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
             defaultValue=""
           >
             <option value="">—</option>
@@ -77,10 +77,10 @@ export function FinancialEntryCreateForm({
           </select>
         </div>
         <div>
-          <label className="block text-xs font-medium text-slate-600">Veículo (opcional)</label>
+          <label className="block text-xs font-medium text-muted">Veículo (opcional)</label>
           <select
             name="vehicleId"
-            className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+            className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
             defaultValue=""
           >
             <option value="">—</option>
@@ -92,14 +92,14 @@ export function FinancialEntryCreateForm({
           </select>
         </div>
         <div className="lg:col-span-3">
-          <label className="block text-xs font-medium text-slate-600" htmlFor="notes">
+          <label className="block text-xs font-medium text-muted" htmlFor="notes">
             Observações (opcional)
           </label>
           <textarea
             id="notes"
             name="notes"
             rows={2}
-            className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900"
+            className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
           />
         </div>
       </div>
@@ -137,7 +137,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-xs font-medium text-slate-600" htmlFor={name}>
+      <label className="block text-xs font-medium text-muted" htmlFor={name}>
         {label}
       </label>
       <input
@@ -146,7 +146,7 @@ function Field({
         type={type}
         required={required}
         placeholder={placeholder}
-        className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900"
+        className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
       />
     </div>
   );

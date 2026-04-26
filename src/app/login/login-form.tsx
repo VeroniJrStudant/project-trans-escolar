@@ -39,7 +39,7 @@ export function LoginForm({ dbUnreachable = false }: { dbUnreachable?: boolean }
       <div>
         <label
           htmlFor="email"
-          className="block text-xs font-medium text-slate-400"
+          className="block text-xs font-medium text-muted"
         >
           E-mail
         </label>
@@ -49,14 +49,14 @@ export function LoginForm({ dbUnreachable = false }: { dbUnreachable?: boolean }
           type="email"
           required
           autoComplete="email"
-          className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+          className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink placeholder:text-subtle focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
           placeholder="admin@escola.local"
         />
       </div>
       <div>
         <label
           htmlFor="password"
-          className="block text-xs font-medium text-slate-400"
+          className="block text-xs font-medium text-muted"
         >
           Senha
         </label>
@@ -66,7 +66,7 @@ export function LoginForm({ dbUnreachable = false }: { dbUnreachable?: boolean }
           type="password"
           required
           autoComplete="current-password"
-          className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+          className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink placeholder:text-subtle focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
         />
       </div>
       {error ? (

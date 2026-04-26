@@ -18,7 +18,7 @@ export function RouteMap({
       <div
         className={
           className ??
-          "flex h-[420px] items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-500"
+          "flex h-[420px] items-center justify-center rounded-xl border border-dashed border-line bg-elevated-2 text-sm text-subtle"
         }
       >
         Sem pontos GPS para exibir.
@@ -33,7 +33,7 @@ export function RouteMap({
     <div
       className={
         className ??
-        "h-[420px] w-full overflow-hidden rounded-xl border border-slate-200 shadow-sm"
+        "h-[420px] w-full overflow-hidden rounded-xl border border-line shadow-sm"
       }
     >
       <MapContainer

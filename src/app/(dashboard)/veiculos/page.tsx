@@ -11,10 +11,8 @@ export default async function VehiclesPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
-          Veículos
-        </h1>
-        <p className="mt-1 max-w-2xl text-sm text-slate-600">
+        <h1 className="text-2xl font-semibold tracking-tight text-ink">Veículos</h1>
+        <p className="mt-1 max-w-2xl text-sm text-muted">
           Controle individual por unidade: motorista responsável, rota associada,
           quilometragem e próximos vencimentos.
         </p>
@@ -29,7 +27,7 @@ export default async function VehiclesPage() {
         </Link>
         <Link
           href="/lancamentos"
-          className="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm hover:bg-slate-50"
+          className="inline-flex items-center justify-center rounded-lg border border-line bg-elevated px-4 py-2 text-sm font-semibold text-ink shadow-sm hover:bg-elevated-2"
         >
           Central de lançamentos
         </Link>
@@ -40,42 +38,40 @@ export default async function VehiclesPage() {
           <Link
             key={v.id}
             href={`/veiculos/${v.id}`}
-            className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-300/80 hover:shadow-md"
+            className="group rounded-xl border border-line bg-elevated p-5 shadow-sm transition hover:border-emerald-300/80 hover:shadow-md"
           >
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-lg font-semibold text-slate-900">
-                  {v.plate}
-                </p>
-                <p className="text-sm text-slate-600">{v.label}</p>
+                <p className="text-lg font-semibold text-ink">{v.plate}</p>
+                <p className="text-sm text-muted">{v.label}</p>
               </div>
-              <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-700 ring-1 ring-slate-200 group-hover:bg-emerald-50 group-hover:text-emerald-900 group-hover:ring-emerald-200">
+              <span className="rounded-full bg-elevated-2 px-2.5 py-0.5 text-xs font-medium text-muted ring-1 ring-line/60 group-hover:bg-emerald-50 group-hover:text-emerald-900 group-hover:ring-emerald-200">
                 {vehicleKindLabel[v.kind]}
               </span>
             </div>
-            <dl className="mt-4 grid grid-cols-2 gap-3 text-xs text-slate-600">
+            <dl className="mt-4 grid grid-cols-2 gap-3 text-xs text-muted">
               <div>
-                <dt className="text-slate-500">Odômetro</dt>
-                <dd className="font-medium text-slate-800">
+                <dt className="text-subtle">Odômetro</dt>
+                <dd className="font-medium text-ink">
                   {formatKm(v.odometerKm)}
                 </dd>
               </div>
               <div>
-                <dt className="text-slate-500">Capacidade</dt>
-                <dd className="font-medium text-slate-800">
+                <dt className="text-subtle">Capacidade</dt>
+                <dd className="font-medium text-ink">
                   {v.capacity} lugares
                 </dd>
               </div>
               <div className="col-span-2">
-                <dt className="text-slate-500">Próxima inspeção / doc.</dt>
-                <dd className="font-medium text-slate-800">
+                <dt className="text-subtle">Próxima inspeção / doc.</dt>
+                <dd className="font-medium text-ink">
                   {formatDate(v.nextInspectionDate)}
                 </dd>
               </div>
               {v.driverName ? (
                 <div className="col-span-2">
-                  <dt className="text-slate-500">Motorista</dt>
-                  <dd className="font-medium text-slate-800">{v.driverName}</dd>
+                  <dt className="text-subtle">Motorista</dt>
+                  <dd className="font-medium text-ink">{v.driverName}</dd>
                 </div>
               ) : null}
             </dl>

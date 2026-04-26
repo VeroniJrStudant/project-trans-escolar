@@ -12,7 +12,7 @@ export function AnnouncementCreateForm() {
 
   return (
     <form
-      className="space-y-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
+      className="space-y-4 rounded-xl border border-line bg-elevated p-5 shadow-sm"
       onSubmit={(e) => {
         e.preventDefault();
         setMsg(null);
@@ -28,8 +28,8 @@ export function AnnouncementCreateForm() {
       }}
     >
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-sm font-semibold text-slate-800">Novo aviso</h2>
-        <label className="flex items-center gap-2 text-xs font-medium text-slate-600">
+        <h2 className="text-sm font-semibold text-ink">Novo aviso</h2>
+        <label className="flex items-center gap-2 text-xs font-medium text-muted">
           <input type="checkbox" name="pinned" className="h-4 w-4" />
           Fixar
         </label>
@@ -37,7 +37,7 @@ export function AnnouncementCreateForm() {
 
       <Field label="Título" name="title" required />
       <div>
-        <label className="block text-xs font-medium text-slate-600" htmlFor="body">
+        <label className="block text-xs font-medium text-muted" htmlFor="body">
           Mensagem
         </label>
         <textarea
@@ -45,7 +45,7 @@ export function AnnouncementCreateForm() {
           name="body"
           required
           rows={4}
-          className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900"
+          className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
         />
       </div>
 
@@ -80,7 +80,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-xs font-medium text-slate-600" htmlFor={name}>
+      <label className="block text-xs font-medium text-muted" htmlFor={name}>
         {label}
       </label>
       <input
@@ -88,7 +88,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900"
+        className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
       />
     </div>
   );

@@ -16,7 +16,7 @@ export function VehicleCreateForm() {
 
   return (
     <form
-      className="space-y-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
+      className="space-y-4 rounded-xl border border-line bg-elevated p-5 shadow-sm"
       onSubmit={(e) => {
         e.preventDefault();
         setMsg(null);
@@ -32,18 +32,16 @@ export function VehicleCreateForm() {
         });
       }}
     >
-      <h2 className="text-sm font-semibold text-slate-800">Novo veículo</h2>
+      <h2 className="text-sm font-semibold text-ink">Novo veículo</h2>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Placa" name="plate" required placeholder="ABC-1D23" />
         <Field label="Identificação / modelo" name="label" required />
         <div className="sm:col-span-2">
-          <label className="block text-xs font-medium text-slate-600">
-            Tipo
-          </label>
+          <label className="block text-xs font-medium text-muted">Tipo</label>
           <select
             name="kind"
             required
-            className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+            className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
             defaultValue="van"
           >
             {kinds.map((k) => (
@@ -68,12 +66,10 @@ export function VehicleCreateForm() {
           defaultValue={0}
         />
         <div>
-          <label className="block text-xs font-medium text-slate-600">
-            Status
-          </label>
+          <label className="block text-xs font-medium text-muted">Status</label>
           <select
             name="status"
-            className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+            className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
             defaultValue="ativo"
           >
             <option value="ativo">Ativo</option>
@@ -132,7 +128,7 @@ function Field({
 }) {
   return (
     <div className={className}>
-      <label className="block text-xs font-medium text-slate-600" htmlFor={name}>
+      <label className="block text-xs font-medium text-muted" htmlFor={name}>
         {label}
       </label>
       <input
@@ -142,7 +138,7 @@ function Field({
         required={required}
         defaultValue={defaultValue}
         placeholder={placeholder}
-        className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900"
+        className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
       />
     </div>
   );

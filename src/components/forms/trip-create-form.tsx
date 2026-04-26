@@ -20,7 +20,7 @@ export function TripCreateForm({ vehicles }: { vehicles: Vehicle[] }) {
 
   return (
     <form
-      className="space-y-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
+      className="space-y-4 rounded-xl border border-line bg-elevated p-5 shadow-sm"
       onSubmit={(e) => {
         e.preventDefault();
         setMsg(null);
@@ -34,23 +34,19 @@ export function TripCreateForm({ vehicles }: { vehicles: Vehicle[] }) {
         });
       }}
     >
-      <h2 className="text-sm font-semibold text-slate-800">
-        Registrar viagem com trajeto
-      </h2>
-      <p className="text-xs text-slate-500">
+      <h2 className="text-sm font-semibold text-ink">Registrar viagem com trajeto</h2>
+      <p className="text-xs text-subtle">
         Informe início/fim, distância e um array JSON de pontos{" "}
-        <code className="rounded bg-slate-100 px-1">lat</code> /{" "}
-        <code className="rounded bg-slate-100 px-1">lng</code> na ordem da rota.
+        <code className="rounded bg-elevated-2 px-1">lat</code> /{" "}
+        <code className="rounded bg-elevated-2 px-1">lng</code> na ordem da rota.
       </p>
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="sm:col-span-2">
-          <label className="block text-xs font-medium text-slate-600">
-            Veículo
-          </label>
+          <label className="block text-xs font-medium text-muted">Veículo</label>
           <select
             name="vehicleId"
             required
-            className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+            className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
             defaultValue={vehicles[0]?.id}
           >
             {vehicles.map((v) => (
@@ -77,7 +73,7 @@ export function TripCreateForm({ vehicles }: { vehicles: Vehicle[] }) {
         />
         <Field label="Fim" name="endedAt" type="datetime-local" required />
         <div className="sm:col-span-2">
-          <label className="block text-xs font-medium text-slate-600" htmlFor="waypointsJson">
+          <label className="block text-xs font-medium text-muted" htmlFor="waypointsJson">
             Pontos (JSON)
           </label>
           <textarea
@@ -86,7 +82,7 @@ export function TripCreateForm({ vehicles }: { vehicles: Vehicle[] }) {
             required
             rows={6}
             defaultValue={defaultWaypoints}
-            className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 font-mono text-xs text-slate-900"
+            className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 font-mono text-xs text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
           />
         </div>
       </div>
@@ -130,7 +126,7 @@ function Field({
 }) {
   return (
     <div className={className}>
-      <label className="block text-xs font-medium text-slate-600" htmlFor={name}>
+      <label className="block text-xs font-medium text-muted" htmlFor={name}>
         {label}
       </label>
       <input
@@ -141,7 +137,7 @@ function Field({
         required={required}
         defaultValue={defaultValue}
         placeholder={placeholder}
-        className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900"
+        className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
       />
     </div>
   );

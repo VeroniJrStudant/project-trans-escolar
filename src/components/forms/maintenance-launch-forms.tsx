@@ -38,10 +38,10 @@ export function MaintenanceLaunchForms({ vehicles }: { vehicles: Vehicle[] }) {
   }
 
   return (
-    <div className="space-y-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="space-y-4 rounded-xl border border-line bg-elevated p-5 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-sm font-semibold text-slate-800">Novo lançamento</h2>
-        <div className="flex gap-1 rounded-lg border border-slate-200 p-0.5">
+        <h2 className="text-sm font-semibold text-ink">Novo lançamento</h2>
+        <div className="flex gap-1 rounded-lg border border-line bg-elevated-2 p-0.5">
           {(
             [
               ["peca", "Peça"],
@@ -59,7 +59,7 @@ export function MaintenanceLaunchForms({ vehicles }: { vehicles: Vehicle[] }) {
               className={
                 tab === id
                   ? "rounded-md bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white"
-                  : "rounded-md px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50"
+                  : "rounded-md px-3 py-1.5 text-xs font-medium text-muted hover:bg-elevated"
               }
             >
               {label}
@@ -143,11 +143,11 @@ export function MaintenanceLaunchForms({ vehicles }: { vehicles: Vehicle[] }) {
 function VehicleSelect({ vehicles }: { vehicles: Vehicle[] }) {
   return (
     <div className="sm:col-span-2">
-      <label className="block text-xs font-medium text-slate-600">Veículo</label>
+      <label className="block text-xs font-medium text-muted">Veículo</label>
       <select
         name="vehicleId"
         required
-        className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+        className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
         defaultValue={vehicles[0]?.id}
       >
         {vehicles.map((v) => (
@@ -177,7 +177,7 @@ function Field({
 }) {
   return (
     <div className={className}>
-      <label className="block text-xs font-medium text-slate-600" htmlFor={`m-${name}`}>
+      <label className="block text-xs font-medium text-muted" htmlFor={`m-${name}`}>
         {label}
       </label>
       <input
@@ -186,7 +186,7 @@ function Field({
         type={type}
         step={step}
         required={required}
-        className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900"
+        className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
       />
     </div>
   );

@@ -13,10 +13,10 @@ export default function NewVehiclePage() {
         >
           ← Voltar para veículos
         </Link>
-        <h1 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900">
+        <h1 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
           Novo veículo
         </h1>
-        <p className="mt-1 text-sm text-slate-600">
+        <p className="mt-1 text-sm text-muted">
           Cadastro persistido no PostgreSQL. Placa deve ser única.
         </p>
       </div>

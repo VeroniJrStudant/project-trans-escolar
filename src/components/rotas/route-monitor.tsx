@@ -31,7 +31,7 @@ export function RouteMonitor({
 
   if (!trip) {
     return (
-      <p className="text-sm text-slate-600">Nenhuma viagem registrada.</p>
+      <p className="text-sm text-muted">Nenhuma viagem registrada.</p>
     );
   }
 
@@ -41,7 +41,7 @@ export function RouteMonitor({
         <div className="max-w-xl space-y-2">
           <label
             htmlFor="trip"
-            className="text-xs font-medium uppercase tracking-wide text-slate-500"
+            className="text-xs font-medium uppercase tracking-wide text-subtle"
           >
             Viagem registrada
           </label>
@@ -49,7 +49,7 @@ export function RouteMonitor({
             id="trip"
             value={trip.id}
             onChange={(e) => setTripId(e.target.value)}
-            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+            className="w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
           >
             {trips.map((t) => {
               const v = vehicles.find((x) => x.id === t.vehicleId);
@@ -61,24 +61,24 @@ export function RouteMonitor({
             })}
           </select>
         </div>
-        <dl className="grid grid-cols-2 gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm sm:grid-cols-4 lg:gap-6 lg:px-5">
+        <dl className="grid grid-cols-2 gap-3 rounded-xl border border-line bg-elevated px-4 py-3 text-sm sm:grid-cols-4 lg:gap-6 lg:px-5">
           <div>
-            <dt className="text-xs text-slate-500">Veículo</dt>
-            <dd className="font-semibold text-slate-900">
+            <dt className="text-xs text-subtle">Veículo</dt>
+            <dd className="font-semibold text-ink">
               {vehicle?.plate ?? "—"}
             </dd>
           </div>
           <div>
-            <dt className="text-xs text-slate-500">Distância</dt>
-            <dd className="font-semibold text-slate-900">{trip.distanceKm} km</dd>
+            <dt className="text-xs text-subtle">Distância</dt>
+            <dd className="font-semibold text-ink">{trip.distanceKm} km</dd>
           </div>
           <div>
-            <dt className="text-xs text-slate-500">Paradas</dt>
-            <dd className="font-semibold text-slate-900">{trip.stops}</dd>
+            <dt className="text-xs text-subtle">Paradas</dt>
+            <dd className="font-semibold text-ink">{trip.stops}</dd>
           </div>
           <div className="col-span-2 sm:col-span-1">
-            <dt className="text-xs text-slate-500">Janela</dt>
-            <dd className="text-xs font-medium leading-snug text-slate-800">
+            <dt className="text-xs text-subtle">Janela</dt>
+            <dd className="text-xs font-medium leading-snug text-ink">
               {formatDateTime(trip.startedAt)} → {formatDateTime(trip.endedAt)}
             </dd>
           </div>
@@ -87,7 +87,7 @@ export function RouteMonitor({
 
       <RouteMapDynamic positions={positions} />
 
-      <p className="text-xs text-slate-500">
+      <p className="text-xs text-subtle">
         Em produção, alimente o mapa com pontos GPS reais (telemetria ou app do
         motorista). Esta tela já separa monitoramento de rota do cadastro de
         manutenção.

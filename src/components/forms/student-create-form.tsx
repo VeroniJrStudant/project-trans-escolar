@@ -12,7 +12,7 @@ export function StudentCreateForm() {
 
   return (
     <form
-      className="space-y-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
+      className="space-y-4 rounded-xl border border-line bg-elevated p-5 shadow-sm"
       onSubmit={(e) => {
         e.preventDefault();
         setMsg(null);
@@ -27,21 +27,21 @@ export function StudentCreateForm() {
         });
       }}
     >
-      <h2 className="text-sm font-semibold text-slate-800">Novo aluno</h2>
+      <h2 className="text-sm font-semibold text-ink">Novo aluno</h2>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Nome" name="name" required className="sm:col-span-2" />
         <Field label="Nascimento (opcional)" name="birthDate" type="date" />
         <Field label="Responsável (opcional)" name="guardianName" />
         <Field label="Telefone (opcional)" name="guardianPhone" />
         <div className="sm:col-span-2">
-          <label className="block text-xs font-medium text-slate-600" htmlFor="notes">
+          <label className="block text-xs font-medium text-muted" htmlFor="notes">
             Observações (opcional)
           </label>
           <textarea
             id="notes"
             name="notes"
             rows={3}
-            className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900"
+            className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
           />
         </div>
       </div>
@@ -79,7 +79,7 @@ function Field({
 }) {
   return (
     <div className={className}>
-      <label className="block text-xs font-medium text-slate-600" htmlFor={name}>
+      <label className="block text-xs font-medium text-muted" htmlFor={name}>
         {label}
       </label>
       <input
@@ -87,7 +87,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900"
+        className="mt-1 w-full rounded-lg border border-line bg-elevated-2 px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
       />
     </div>
   );

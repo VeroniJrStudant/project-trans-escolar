@@ -20,10 +20,10 @@ export default async function MaintenancePage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
+        <h1 className="text-2xl font-semibold tracking-tight text-ink">
           Manutenção do veículo
         </h1>
-        <p className="mt-1 max-w-2xl text-sm text-slate-600">
+        <p className="mt-1 max-w-2xl text-sm text-muted">
           Registre peças, combustível e demais intervenções com vínculo ao
           odômetro. Os lançamentos são gravados no PostgreSQL.
         </p>
