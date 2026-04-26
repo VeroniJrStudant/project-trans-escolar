@@ -57,7 +57,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   className={cx(
                     "flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                     active
-                      ? "bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/30"
+                      ? "bg-emerald-500/15 text-emerald-800 ring-1 ring-emerald-500/30"
                       : [
                           // paleta do projeto creche (muted + elevated)
                           "text-muted hover:bg-elevated hover:text-ink",

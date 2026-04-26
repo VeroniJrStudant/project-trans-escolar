@@ -42,7 +42,7 @@ export default async function RoutesPage() {
       <GpsRecentTable points={gpsPoints} />
 
       <section className="rounded-xl border border-line bg-panel p-5 text-sm text-muted">
-        <h2 className="text-sm font-semibold text-emerald-300">
+        <h2 className="text-sm font-semibold text-accent">
           API de telemetria (GPS)
         </h2>
         <p className="mt-2 text-xs leading-relaxed text-subtle">

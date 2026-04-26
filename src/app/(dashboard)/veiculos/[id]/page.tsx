@@ -97,7 +97,7 @@ export default async function VehicleDetailPage({
           </dl>
         </div>
         <div className="rounded-xl border border-line bg-panel p-4 text-ink shadow-sm">
-          <h2 className="text-sm font-semibold text-emerald-300">Resumo rápido</h2>
+          <h2 className="text-sm font-semibold text-accent">Resumo rápido</h2>
           <ul className="mt-3 space-y-2 text-xs text-muted">
             <li>
               Viagens com trajeto:{" "}

@@ -63,7 +63,7 @@ export default function LancamentosPage() {
           </p>
           <Link
             href="/rotas"
-            className="mt-3 inline-block text-xs font-medium text-emerald-300 hover:underline"
+            className="mt-3 inline-block text-xs font-medium text-accent hover:underline"
           >
             Ver exemplo de payload →
           </Link>
